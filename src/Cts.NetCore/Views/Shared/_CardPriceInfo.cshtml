@@ -1,0 +1,41 @@
+﻿@model Cts.NetCore.Models.HexPrice
+
+
+<h1>Card Price</h1>
+<br />
+@if (Model.Empty)
+{
+    <p>No Price Data</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td>Currency</td>
+                <td>Total</td>
+                <td>Min</td>
+                <td>Max</td>
+                <td>Avg</td>
+                <td>Median</td>
+            </tr>
+        </thead>
+        <tr>
+            <td>Platinum</td>
+            <td>@Html.DisplayTextFor(model => model.platinum.total)</td>
+            <td>@Html.DisplayTextFor(model => model.platinum.minimum)</td>
+            <td>@Html.DisplayTextFor(model => model.platinum.maximum)</td>
+            <td>@Html.DisplayTextFor(model => model.platinum.average)</td>
+            <td>@Html.DisplayTextFor(model => model.platinum.median)</td>
+        </tr>
+        <tr>
+            <td>Gold</td>
+            <td>@Html.DisplayTextFor(model => model.gold.total)</td>
+            <td>@Html.DisplayTextFor(model => model.gold.minimum)</td>
+            <td>@Html.DisplayTextFor(model => model.gold.maximum)</td>
+            <td>@Html.DisplayTextFor(model => model.gold.average)</td>
+            <td>@Html.DisplayTextFor(model => model.gold.median)</td>
+        </tr>
+    </table>
+
+}

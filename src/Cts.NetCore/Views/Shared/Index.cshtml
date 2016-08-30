@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Cts.NetCore.Models.ViewModels.IndexViewModel
+@{
     ViewData["Title"] = "Index";
     Layout = "_Layout";
 }
@@ -11,22 +12,25 @@
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="col-md-6">
-                //Enter Card Info Here
+                <div class="form-group input-group-sm">
+                    @Html.TextBoxFor(model => model.CardSearchName)
+                </div>
+                <div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+                    <input type="submit" id="getCard" value="Get Card Info" class="btn btn-default btn-success" />
+                </div>
             </div>
             <div class="col-md-6">
                 <ul class="nav nav-tabs" data-tabs="tabs" id="myTab">
                     <li class="active"><a data-toggle="tab" href="#price">Price</a></li>
-                    <li><a data-toggle="tab" href="#currentstock">Current Stock</a></li>
+                    <li><a data-toggle="tab" href="#cardinfo">Information</a></li>
                     <li><a data-toggle="tab" href="#buy">Buy</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="price">
-                        <h1>Card Price</h1>
-                        <p>Financial Analysis Database</p>
+                        @{Html.RenderPartial("_CardPriceInfo", Model.CardPrice);}                        
                     </div>
-                    <div class="tab-pane" id="currentstock">
-                        <h1>Stock Level:</h1>
-                        <p>5 cards</p>
+                    <div class="tab-pane" id="cardinfo">
+                        @{Html.RenderPartial("_CardInfo", Model.Card);}
                     </div>
                     <div class="tab-pane" id="buy">
                         <h1>Purchase Card</h1>
