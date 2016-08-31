@@ -7,6 +7,7 @@ using System.Net;
 using Newtonsoft.Json;
 using Cts.NetCore.Models;
 using Cts.NetCore.Services;
+using Cts.NetCore.Models.ViewModels;
 
 namespace Cts.NetCore.Controllers
 {
@@ -21,11 +22,13 @@ namespace Cts.NetCore.Controllers
         }
 
         [HttpPost]
-        public ActionResult LoadCardInfoTab(string cardName)
+        public ActionResult LoadCardInfoTab(IndexViewModel card)
         {
             var service = new HexSalesApi();
-            var results = service.GetCardInfo(cardName);
-            return PartialView("Views/Shared/_CardInfo.cshtml", results);
+            //var results = service.GetCardInfo(card.CardSearchName);            
+            //return PartialView("Views/Shared/_CardInfo.cshtml", results);
+            var results = service.GetIndexData(card.CardSearchName);
+            return View("Views/Shared/Index.cshtml", results);
         }
     }
 }
