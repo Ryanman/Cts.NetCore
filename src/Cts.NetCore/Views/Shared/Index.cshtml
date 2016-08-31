@@ -12,12 +12,11 @@
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="col-md-6">
-                <div class="form-group input-group-sm">
-                    @Html.TextBoxFor(model => model.CardSearchName)
-                </div>
-                <div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+                @using (Html.BeginForm("LoadCardInfoTab", "Home", FormMethod.Post, new { id = "searchForm", name="searchForm"}))
+                {
+                     @Html.TextBoxFor(model => model.CardSearchName, new { @class = "form-control", placeholder = "Enter Card Name Here..." })
                     <input type="submit" id="getCard" value="Get Card Info" class="btn btn-default btn-success" />
-                </div>
+                }
             </div>
             <div class="col-md-6">
                 <ul class="nav nav-tabs" data-tabs="tabs" id="myTab">
@@ -46,9 +45,31 @@
     $('#myTab a').click(function (e) {
         e.preventDefault()
         $(this).tab('show')
-    })
+        })
         $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
             e.relatedTarget // previous tab
-        });
+        });        
 </script>
 
+<script>
+    //$('#searchForm').submit(function (e) {
+    //    e.preventDefault();
+    //    var formData = {
+    //        cardSearchName: cardSearchName
+    //    };
+
+
+        $.ajax({
+            url: '/Home/LoadCardInfoTab',
+            type: "POST",
+            dataType: "html",
+            data: $("#searchForm").serialize(),
+            success: function (data)
+            {
+                //Fill div with results
+                $("#cardinfo").html(data);
+            },
+            error: function () { alert('error'); }
+        });
+    //});
+</script>

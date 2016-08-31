@@ -24,7 +24,7 @@ namespace Cts.NetCore.Services
         public IndexViewModel GetIndexData(string cardName)
         {
             var vm = new IndexViewModel();
-            vm.CardSearchName = cardName;
+            vm.CardSearchName = null;
             vm.Card = GetCardInfo(cardName);
             vm.CardPrice = GetPriceInfo(cardName);
             return vm;

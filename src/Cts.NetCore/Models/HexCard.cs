@@ -22,6 +22,5 @@
                     string.IsNullOrWhiteSpace(Rarity));
             }
         }
-
     }
 }

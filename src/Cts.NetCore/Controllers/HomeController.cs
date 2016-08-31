@@ -13,11 +13,19 @@ namespace Cts.NetCore.Controllers
     public class HomeController : Controller
     {
         public const string defaultCard = "Vampire King";
-        public IActionResult Index()
+        public IActionResult Index(string cardName = null)
         {
             var service = new HexSalesApi();
-            var vm = service.GetIndexData(defaultCard);
+            var vm = service.GetIndexData(cardName ?? defaultCard);
             return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult LoadCardInfoTab(string cardName)
+        {
+            var service = new HexSalesApi();
+            var results = service.GetCardInfo(cardName);
+            return PartialView("Views/Shared/_CardInfo.cshtml", results);
         }
     }
 }
